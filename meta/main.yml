@@ -12,6 +12,8 @@ galaxy_info:
         - trusty
         - xenial
         - bionic
+    - name: debian
+      versions:
         - jessie
         - stretch
         - buster

@@ -1,1 +1,48 @@
 ---
+- name: Ensure iptables is present
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - iptables
+    - iptables-persistent
+
+- name: Add rule
+  iptables:
+    action: "{{ item.action | default(omit) }}"
+    chain: "{{ item.chain | default(omit) }}"
+    comment: "{{ item.comment | default(omit) }}"
+    ctstate: "{{ item.ctstate | default(omit) }}"
+    destination: "{{ item.destination | default(omit) }}"
+    destination_port: "{{ item.destination_port | default(omit) }}"
+    flush: "{{ item.flush | default(omit) }}"
+    fragment: "{{ item.fragment | default(omit) }}"
+    goto: "{{ item.goto | default(omit) }}"
+    icmp_type: "{{ item.icmp_type | default(omit) }}"
+    in_interface: "{{ item.in_interface | default(omit) }}"
+    ip_version: "{{ item.ip_version | default(omit) }}"
+    jump: "{{ item.jump | default(omit) }}"
+    limit: "{{ item.limit | default(omit) }}"
+    limit_burst: "{{ item.limit_burst | default(omit) }}"
+    log_prefix: "{{ item.log_prefix | default(omit) }}"
+    match: "{{ item.match | default(omit) }}"
+    out_interface: "{{ item.out_interface | default(omit) }}"
+    policy: "{{ item.policy | default(omit) }}"
+    protocol: "{{ item.protocol | default(omit) }}"
+    reject_with: "{{ item.reject_with | default(omit) }}"
+    rule_num: "{{ item.rule_num | default(omit) }}"
+    set_counters: "{{ item.set_counters | default(omit) }}"
+    set_dscp_mark: "{{ item.set_dscp_mark | default(omit) }}"
+    set_dscl_mark_class: "{{ item.set_dscl_mark_class | default(omit) }}"
+    source: "{{ item.source | default(omit) }}"
+    source_port: "{{ item.source_port | default(omit) }}"
+    state: "{{ item.state | default(omit) }}"
+    syn: "{{ item.syn | default(omit) }}"
+    table: "{{ item.table | default(omit) }}"
+    tcp_flags: "{{ item.tcp_flags | default(omit) }}"
+    to_destination: "{{ item.to_destination | default(omit) }}"
+    to_ports: "{{ item.to_ports | default(omit) }}"
+    to_source: "{{ item.to_source | default(omit) }}"
+    uid_owner: "{{ item.uid_owner | default(omit) }}"
+  with_items: "{{ fwr__rules }}"
+  notify: Persist iptables rules
