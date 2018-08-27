@@ -1,1 +1,23 @@
 ---
+- name: Ensure iptables is present
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - iptables
+    - iptables-persistent
+
+- name: Add rule
+  iptables:
+    chain: "{{ item.chain }}"
+    protocol: "{{ item.protocol | default(omit) }}"
+    destination_port: "{{ item.destination_port | default(omit) }}"
+    source_port: "{{ item.source_port | default(omit) }}"
+    jump: "{{ item.jump | default(omit) }}"
+    comment: "{{ item.comment | default(omit) }}"
+    policy: "{{ item.policy | default(omit) }}"
+    ctstate: "{{ item.ctstate | default(omit) }}"
+    in_interface: "{{ item.in_interface | default(omit) }}"
+    out_interface: "{{ item.out_interface | default(omit) }}"
+  with_items: "{{ fwr__rules }}"
+  notify: Persist iptables rules

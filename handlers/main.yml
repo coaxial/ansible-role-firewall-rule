@@ -1,1 +1,8 @@
 ---
+- name: Save iptables v4 rules
+  shell: iptables-save > /etc/iptables/rules.v4
+  listen: Persist iptables rules
+
+- name: Save iptables v6 rules
+  shell: iptables-save > /etc/iptables/rules.v6
+  listen: Persist iptables rules
