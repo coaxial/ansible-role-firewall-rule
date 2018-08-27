@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  author: Coaxial
+  description: Add firewall rules and persist them.
+  company: 64b.it
+  role_name: firewall-rule
+  license: MIT
+  min_ansible_version: 2.5
+  platforms:
+    - name: ubuntu
+      versions:
+        - trusty
+        - xenial
+        - bionic
+        - jessie
+        - stretch
+        - buster
+  galaxy_tags:
+    - iptables
+    - firewall
+    - system
+
+  dependencies: []
