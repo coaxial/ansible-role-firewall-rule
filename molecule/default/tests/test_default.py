@@ -18,4 +18,4 @@ def test_persist(host):
     v6 = host.file('/etc/iptables/rules.v6')
 
     assert v4.contains('-A INPUT -p tcp -m tcp --dport 1337 -j DROP')
-    assert v6.contains('-A INPUT -p tcp -m tcp --dport 1337 -j DROP')
+    assert v6.contains('-A INPUT -s 2600::/128 -p tcp -j DROP')
